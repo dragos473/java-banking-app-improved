@@ -1,9 +1,7 @@
-package org.poo.main;
+package org.poo.main.objects;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.poo.main.objects.Commerciants;
-import org.poo.main.objects.Output;
 import org.poo.main.objects.accounts.Account;
 
 import java.util.ArrayList;

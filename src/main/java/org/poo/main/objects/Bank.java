@@ -2,31 +2,44 @@ package org.poo.main.objects;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.poo.fileio.CommerciantInput;
 import org.poo.fileio.ExchangeInput;
 import org.poo.fileio.ObjectInput;
 import org.poo.fileio.UserInput;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
 public final class Bank {
     private static Bank instance;
     private ArrayList<User> users;
+    private List<Commerciant> commerciants;
     private Exchange exchange;
+    private Cashback cashback;
 
     private Bank() {
         users = new ArrayList<>();
         UserInput[] get = Input.getInstance(new ObjectInput()).inputData.getUsers();
         for (UserInput ui : get) {
-            users.add(new User(ui.getFirstName(), ui.getLastName(), ui.getEmail()));
+            users.add(new User(ui.getFirstName(), ui.getLastName(),
+                    ui.getEmail(), ui.getBirthDate(), ui.getOccupation()));
         }
+        exchange = new Exchange();
         ExchangeInput[] commands = Input.getInstance(new ObjectInput())
                 .inputData.getExchangeRates();
-        exchange = new Exchange();
         for (ExchangeInput ei : commands) {
             getExchange().addRate(ei.getFrom(), ei.getTo(), ei.getRate());
         }
+        commerciants = new ArrayList<>();
+        CommerciantInput[] getCommerciant = Input.getInstance(new ObjectInput())
+                .inputData.getCommerciants();
+        for(CommerciantInput ci : getCommerciant) {
+            commerciants.add(new Commerciant(ci.getCommerciant(), ci.getAccount(),
+                    ci.getType(), ci.getCashbackStrategy(), ci.getId()));
+        }
+        cashback = new Cashback();
     }
 
     /**
@@ -59,5 +72,14 @@ public final class Bank {
             }
         }
         throw new NoSuchMethodException("No User Found");
+    }
+
+    public Commerciant getCommerciant(final String key) {
+        for (Commerciant c : commerciants) {
+            if (c.getName().equals(key) || c.getIban().equals(key)) {
+                return c;
+            }
+        }
+        return null;
     }
 }

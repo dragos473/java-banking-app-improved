@@ -27,6 +27,8 @@ public class ActionMap {
         map.put("spendingsReport", new SpendingReport());
         map.put("changeInterestRate", new ChangeInterestRate());
         map.put("addInterest", new AddInterestRate());
+        map.put("withdrawSavings", new WithdrawSavings());
+        map.put("upgradePlan", new UpgradePlan());
     }
     /**
      * Finds and executes the action given by the command name

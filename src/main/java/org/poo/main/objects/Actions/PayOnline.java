@@ -3,6 +3,7 @@ package org.poo.main.objects.Actions;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.poo.fileio.CommandInput;
 import org.poo.main.objects.Bank;
+import org.poo.main.objects.Commerciant;
 import org.poo.main.objects.Output;
 import org.poo.main.objects.User;
 import org.poo.main.objects.accounts.Account;
@@ -41,6 +42,15 @@ public class PayOnline implements Action {
                 double amount = input.getAmount() * rate;
 
                 a.pay(amount);
+                Commerciant commerciant = Bank.getInstance().getCommerciant(input.getCommerciant());
+                if(commerciant.getCashbackStrategy().equals("nrOfTransactions")) {
+                    a.Cashback(amount, commerciant);
+                    Bank.getInstance().getCashback().notify(a, commerciant, amount);
+
+                } else {
+                    Bank.getInstance().getCashback().notify(a, commerciant, amount);
+                    a.Cashback(amount, commerciant);
+                }
                 found = true;
 
                 try {

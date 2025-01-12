@@ -5,6 +5,8 @@ import org.poo.main.objects.accounts.Cards.Card;
 import org.poo.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Setter
 @Getter
@@ -16,7 +18,8 @@ public class ClassicAccount implements Account {
     private double minBalance;
     private double interestRate;
     private ArrayList<Card> cards;
-
+    private String plan;
+    Map<String, Boolean> coupons = new HashMap<>();
     /**
      * Adds a card to the account
      * @param card Card to be added
@@ -57,8 +60,8 @@ public class ClassicAccount implements Account {
      * @param amount Amount to be paid
      * @throws Exception The account does not have enough balance
      */
-    public void pay(final double amount) throws Exception {
-
+    public void pay(double amount) throws Exception {
+        amount = planModifier(amount);
         if (balance - amount > 0) {
             balance -= amount;
         } else {
@@ -89,5 +92,11 @@ public class ClassicAccount implements Account {
         this.currency = currency;
         this.interestRate = interestRate;
         cards = new ArrayList<>();
+        coupons.put("2%FOOD", false);
+        coupons.put("5%CLOTHES", false);
+        coupons.put("10%TECH", false);
+        coupons.put(">100RON", false);
+        coupons.put(">300RON", false);
+        coupons.put(">500RON", false);
     }
 }

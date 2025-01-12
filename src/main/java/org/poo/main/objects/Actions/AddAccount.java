@@ -28,6 +28,9 @@ public class AddAccount  implements Action {
         }
 
         try {
+            account.setPlan(Bank.getInstance()
+                    .getUser(input.getEmail()).getPlan());
+            Bank.getInstance().getCashback().subscribe(account);
             Bank.getInstance().getUser(input.getEmail()).getAccounts().add(account);
             ObjectNode out = Output.getInstance().mapper.createObjectNode()
                     .put("description", "New account created")

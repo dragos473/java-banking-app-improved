@@ -26,13 +26,13 @@ public class Exchange {
      * @return the exchange rate between the two currencies
      * @throws Exception if the currency is not found in the graph
      */
-    public double getExchangeRate(final String from, final String to) throws Exception {
+    public double getExchangeRate(final String from, final String to) {
         if (from.equals(to)) {
             return 1.0;
         }
 
         if (!graph.containsKey(from) || !graph.containsKey(to)) {
-            throw new Exception("Currency not found in the graph");
+            return -1.0;
         }
 
         Map<String, Double> distances = new HashMap<>();
@@ -64,6 +64,6 @@ public class Exchange {
             }
         }
 
-        throw new Exception("No path found between the currencies");
+        return -1.0;
     }
 }

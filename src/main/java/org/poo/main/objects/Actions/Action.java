@@ -7,5 +7,5 @@ public interface Action {
      * Executes the action at hand
      * @param input the input needed for the action
      */
-    void execute(CommandInput input);
+    void execute(final CommandInput input);
 }

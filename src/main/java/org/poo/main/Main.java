@@ -6,6 +6,11 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.poo.checker.Checker;
 import org.poo.checker.CheckerConstants;
 import org.poo.fileio.ObjectInput;
+import org.poo.main.objects.Bank;
+import org.poo.main.objects.Input;
+import org.poo.main.objects.Output;
+import org.poo.main.objects.Workflow;
+import org.poo.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,8 +77,12 @@ public final class Main {
         File file = new File(CheckerConstants.TESTS_PATH + filePath1);
         ObjectInput inputData = objectMapper.readValue(file, ObjectInput.class);
 
-        ArrayNode output = objectMapper.createArrayNode();
+        Input get = Input.getInstance(inputData);
+        Output JSON = Output.getInstance();
 
+        Bank bank = Bank.getInstance();
+        Workflow work = new Workflow();
+        work.runBank();
         /*
          * TODO Implement your function here
          *
@@ -92,9 +101,12 @@ public final class Main {
          * output.add(objectNode);
          *
          */
-
-        ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
-        objectWriter.writeValue(new File(filePath2), output);
+        Utils.resetRandom();
+        Input.deleteInstance();
+        Bank.deleteInstance();
+        ObjectWriter objectWriter = JSON.mapper.writerWithDefaultPrettyPrinter();
+        objectWriter.writeValue(new File(filePath2), JSON.output);
+        Output.deleteInstance();
     }
 
     /**

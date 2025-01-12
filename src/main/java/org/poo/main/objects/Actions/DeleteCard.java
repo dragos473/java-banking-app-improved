@@ -19,12 +19,8 @@ public class DeleteCard implements  Action {
 
         try {
             User user = Bank.getInstance().getUser(input.getEmail());
-            System.out.println(user.getAccounts());
 
             for (Account a : user.getAccounts()) {
-                for (Card c : a.getCards()) {
-                    System.out.println(c.getCardNumber());
-                }
                 if (a.getCard(input.getCardNumber()) == null) {
                     continue;
                 }
