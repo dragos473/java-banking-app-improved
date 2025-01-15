@@ -20,7 +20,15 @@ public class AddInterestRate implements Action {
                     continue;
                 }
                 SavingsAccount acc = (SavingsAccount) u.getAccount(input.getAccount());
-                acc.deposit(acc.getBalance() * acc.getInterestRate());
+                double amount = acc.getBalance() * acc.getInterestRate();
+                acc.deposit(amount);
+
+                ObjectNode output = Output.getInstance().mapper.createObjectNode()
+                        .put("timestamp", input.getTimestamp())
+                        .put("amount", amount)
+                        .put("currency", acc.getCurrency())
+                        .put("description", "Interest rate income");
+                u.getTransactions().addTransaction(output, acc.getIBAN());
             }
         } catch (Exception e) {
             Output JSON = Output.getInstance();

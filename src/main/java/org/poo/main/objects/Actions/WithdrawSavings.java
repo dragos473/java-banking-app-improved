@@ -32,7 +32,7 @@ public class WithdrawSavings implements Action {
                 double rate = Bank.getInstance()
                         .getExchange().getExchangeRate(input.getCurrency(), acc.getCurrency());
                 double amount = input.getAmount() * rate;
-                acc.pay(amount);
+//                acc.pay(amount);
             } catch (Exception e) {
                 if (e.getMessage().equals("Insufficient funds")) {
                     output.put("description", "Insufficient funds");

@@ -47,9 +47,18 @@ public class SendMoney implements Action {
                             .put("timestamp", input.getTimestamp())
                             .put("transferType", "received");
                     u.getTransactions().addTransaction(payeeOut, payee.getIBAN());
-                    break;
+                    return;
                 }
             }
+            Output JSON = Output.getInstance();
+            ObjectNode out = JSON.mapper.createObjectNode();
+            out.put("command", "sendMoney");
+            ObjectNode outputJSON = JSON.mapper.createObjectNode();
+            outputJSON.put("description", "User not found");
+            outputJSON.put("timestamp", input.getTimestamp());
+            out.put("output", outputJSON);
+            out.put("timestamp", input.getTimestamp());
+            JSON.output.add(out);
 
         } catch (Exception e) {
             if (e.getMessage().equals("Insufficient funds")) {

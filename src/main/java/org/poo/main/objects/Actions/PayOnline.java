@@ -18,6 +18,9 @@ public class PayOnline implements Action {
      */
     @Override
     public void execute(final CommandInput input) {
+        if (input.getAmount() == 0) {
+            return;
+        }
         boolean oneTimeUsed = false;
         try {
             user = Bank.getInstance().getUser(input.getEmail());

@@ -69,7 +69,7 @@ public class SavingsAccount implements Account {
         if (balance - amount > 0) {
             balance -= amount;
         } else {
-            if (balance < amount) {
+            if (balance >= minBalance) {
                 throw new Exception("Insufficient funds");
             }
             throw new Exception("Funds below minimum balance");
