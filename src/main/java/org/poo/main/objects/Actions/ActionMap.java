@@ -30,6 +30,8 @@ public class ActionMap {
         map.put("withdrawSavings", new WithdrawSavings());
         map.put("upgradePlan", new UpgradePlan());
         map.put("cashWithdrawal", new CashWithdrawal());
+        map.put("acceptSplitPayment", new AcceptSplitPayment());
+        map.put("rejectSplitPayment", new RejectSplitPayment());
     }
     /**
      * Finds and executes the action given by the command name

@@ -18,6 +18,13 @@ public class Transactions {
      * @param IBAN the IBAN of the account that made the transaction
      */
     public void addTransaction(final ObjectNode transaction, final String IBAN) {
+        for (int i = 0; i < transactions.size(); i++) {
+            if (transactions.get(i).get("timestamp").asInt() > transaction.get("timestamp").asInt()) {
+                transactions.insert(i, transaction);
+                accounts.add(i, IBAN);
+                return;
+            }
+        }
         transactions.add(transaction);
         accounts.add(IBAN);
     }

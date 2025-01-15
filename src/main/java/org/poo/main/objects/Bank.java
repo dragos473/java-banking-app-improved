@@ -18,6 +18,7 @@ public final class Bank {
     private List<Commerciant> commerciants;
     private Exchange exchange;
     private Cashback cashback;
+    private List<SplitPaymentManager> pendingPayments;
 
     private Bank() {
         users = new ArrayList<>();
@@ -40,6 +41,7 @@ public final class Bank {
                     ci.getType(), ci.getCashbackStrategy(), ci.getId()));
         }
         cashback = new Cashback();
+        pendingPayments = new ArrayList<>();
     }
 
     /**
