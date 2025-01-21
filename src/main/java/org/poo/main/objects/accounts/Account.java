@@ -2,7 +2,6 @@ package org.poo.main.objects.accounts;
 
 import org.poo.main.objects.Bank;
 import org.poo.main.objects.Commerciant;
-import org.poo.main.objects.Commerciants;
 import org.poo.main.objects.accounts.Cards.Card;
 
 import java.util.List;
@@ -63,11 +62,6 @@ public interface Account {
      */
     double getMinBalance();
     /**
-     * Getter for the interest rate of the account
-     * @return Interest rate of the account
-     */
-    double getInterestRate();
-    /**
      * Getter for the cards of the account
      * @return Cards of the account
      */
@@ -86,18 +80,36 @@ public interface Account {
      * Adds a card to the account
      * @param card Card to be added
      */
-    void addCard(Card card);
+    default void addCard(final Card card) {
+        getCards().add(card);
+        getCards().getLast().setBalance(getBalance());
+    }
     /**
      * Finds a card by its card number
      * @param cardNumber Card number to be found
      * @return The card that was found, or null if it doesn't exist
      */
-    Card getCard(String cardNumber);
+    default Card getCard(final String cardNumber) {
+        for (Card c : getCards()) {
+            if (c.getCardNumber().equals(cardNumber)) {
+                return c;
+            }
+        }
+        return null;
+    }
     /**
      * Removes a card from the account
      * @param cardNumber Card number to be removed
      */
-    void removeCard(String cardNumber);
+    default void removeCard(final String cardNumber) throws IllegalArgumentException {
+        for (Card c : getCards()) {
+            if (c.getCardNumber().equals(cardNumber)) {
+                getCards().remove(c);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Card not found");
+    }
 
     //Account methods
 
@@ -125,18 +137,24 @@ public interface Account {
      * @param amount Amount to be paid
      * @throws Exception The account does not have enough balance
      */
-    void pay(double amount) throws Exception;
+    default void pay(double amount) throws Exception {
+        amount = planModifier(amount);
+        if (getBalance() - amount > 0) {
+            setBalance(getBalance() - amount);
+        } else {
+            if (getBalance() >= getMinBalance()) {
+                throw new Exception("Insufficient funds");
+            }
+            throw new Exception("Funds below minimum balance");
+        }
+    }
     /**
      * Deposits an amount to the account
      * @param amount Amount to be deposited
      */
-    void deposit(double amount);
-    /**
-     * Registers an account, used for the AccountFactory
-     * @param currency Currency of the account
-     * @param interestRate Interest rate of the account(0.0 for classic accounts)
-     */
-    void register(String currency, double interestRate);
+    default void deposit(final double amount) {
+        setBalance(getBalance() + amount);
+    }
 
     default void Cashback(double amount, Commerciant commer) {
         if(commer == null) {

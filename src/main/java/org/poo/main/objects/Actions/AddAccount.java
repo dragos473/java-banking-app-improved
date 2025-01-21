@@ -6,6 +6,7 @@ import org.poo.main.objects.Bank;
 import org.poo.main.objects.Output;
 import org.poo.main.objects.accounts.Account;
 import org.poo.main.objects.accounts.AccountFactories.AccountFactory;
+import org.poo.main.objects.accounts.AccountFactories.BusinessAccountFactory;
 import org.poo.main.objects.accounts.AccountFactories.ClassicAccountFactory;
 import org.poo.main.objects.accounts.AccountFactories.SavingsAccountFactory;
 
@@ -18,14 +19,20 @@ public class AddAccount  implements Action {
     @Override
     public void execute(final CommandInput input) {
         AccountFactory factory;
-        Account account;
-        if (input.getAccountType().equals("savings")) {
-            factory = new SavingsAccountFactory();
-            account = factory.create(input.getCurrency(), input.getInterestRate());
-        } else {
-            factory = new ClassicAccountFactory();
-            account = factory.create(input.getCurrency(), 0);
-        }
+        Account account = switch (input.getAccountType()) {
+            case "business" -> {
+                factory = new BusinessAccountFactory();
+                yield factory.create(input.getCurrency(), 0, input.getEmail());
+            }
+            case "savings" -> {
+                factory = new SavingsAccountFactory();
+                yield factory.create(input.getCurrency(), input.getInterestRate(), "");
+            }
+            default -> {
+                factory = new ClassicAccountFactory();
+                yield factory.create(input.getCurrency(), 0, "");
+            }
+        };
 
         try {
             account.setPlan(Bank.getInstance()

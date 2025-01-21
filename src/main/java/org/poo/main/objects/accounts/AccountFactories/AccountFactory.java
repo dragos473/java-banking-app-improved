@@ -9,10 +9,10 @@ public abstract class AccountFactory {
      * @param interestRate the interest rate of the account
      * @return the created account
      */
-    public Account create(final String currency, final double interestRate) {
-        Account account = createAccount();
-        account.register(currency, interestRate);
-        return account;
+    public Account create(final String currency, final double interestRate,
+                          final String owner) {
+        return createAccount(currency, interestRate, owner);
     }
-    protected abstract Account createAccount();
+    protected abstract Account createAccount(final String currency,
+                         final double interestRate, final String owner);
 }

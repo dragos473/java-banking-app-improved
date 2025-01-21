@@ -1,18 +1,18 @@
 package org.poo.main.objects.accounts.AccountFactories;
 
 import org.poo.main.objects.accounts.Account;
-import org.poo.main.objects.accounts.ClassicAccount;
+import org.poo.main.objects.accounts.BusinessAccount;
 
-public class ClassicAccountFactory extends AccountFactory {
+public class BusinessAccountFactory extends AccountFactory {
     /**
-     * Create a new ClassicAccount
-     * @return ClassicAccount
+     * Create a new BusinessAccount
+     * @return BusinessAccount
      */
     @Override
     protected Account createAccount(final String currency, final double interestRate
             , final String owner) {
-        ClassicAccount account = new ClassicAccount();
-        account.register(currency);
+        BusinessAccount account = new BusinessAccount();
+        account.register(currency, owner);
         return account;
     }
 }

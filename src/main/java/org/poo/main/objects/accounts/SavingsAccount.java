@@ -21,67 +21,7 @@ public class SavingsAccount implements Account {
     private ArrayList<Card> cards;
     private String plan;
     Map<String, Boolean> coupons = new HashMap<>();
-    /**
-     * Adds a card to the account
-     * @param card Card to be added
-     */
-    public void addCard(final Card card) {
 
-        cards.add(card);
-        cards.getLast().setBalance(balance);
-    }
-    /**
-     * Finds a card by its card number
-     * @param cardNumber Card number to be found
-     * @return The card that was found, or null if it doesn't exist
-     */
-    public Card getCard(final String cardNumber) {
-
-        for (Card c : cards) {
-            if (c.getCardNumber().equals(cardNumber)) {
-                return c;
-            }
-        }
-        return null;
-    }
-    /**
-     * Removes a card from the account
-     * @param cardNumber Card number to be removed
-     */
-    @Override
-    public void removeCard(final String cardNumber) {
-        for (Card c : cards) {
-            if (c.getCardNumber().equals(cardNumber)) {
-                cards.remove(c);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Card not found");
-    }
-    /**
-     * Pays an amount from the account
-     * @param amount Amount to be paid
-     * @throws Exception The account does not have enough balance
-     */
-    @Override
-    public void pay(double amount) throws Exception {
-        amount = planModifier(amount);
-        if (balance - amount > 0) {
-            balance -= amount;
-        } else {
-            if (balance >= minBalance) {
-                throw new Exception("Insufficient funds");
-            }
-            throw new Exception("Funds below minimum balance");
-        }
-    }
-    /**
-     * Deposits an amount to the account
-     * @param amount Amount to be deposited
-     */
-    public void deposit(final double amount) {
-        balance += amount;
-    }
     /**
      * Registers an account, used for the AccountFactory
      * @param currency Currency of the account
