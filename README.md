@@ -1,34 +1,32 @@
-# Project Assignment POO  - J. POO Morgan - Phase One
+## Java Banking System – Advanced Features
+This project extends the Core Engine to support **Business-Level Banking** and **Advanced Fintech Logic**. It prioritizes complex system interactions. While the first stage focused on transaction integrity, this stage introduces **complex business logic, tiered service plans, and role-based access control (RBAC).**
+The primary goal of this phase was **architectural refactoring** to ensure the codebase can handle the increasing complexity of **modern fintech requirements**.
+**🚀 Advanced Functionality**
 
-![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2dibmZueTVmbGNoY2kxcDlkdHpsd3hvNDA5ZTRleHcwMzRxM2x0OSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/lJEGgG5ajs4zC/giphy.gif)
+Business Accounts & Role-Based Access (RBAC): Implementation of shared business accounts with distinct permissions for Owners, Managers, and Employees.
 
-#### Assignment Link: [https://ocw.cs.pub.ro/courses/poo-ca-cd/teme/2024/proiect-etapa2](https://ocw.cs.pub.ro/courses/poo-ca-cd/teme/2024/proiect-etapa2)
+**Dynamic Service Plans:** A tiered plan system (Standard, Student, Silver, Gold) that adjusts transaction fees and automates upgrades based on user spending habits.
 
-## Skel Structure
+**Complex Cashback Strategies:** High-performance logic to calculate rewards based on transaction frequency and spending thresholds.
 
-* src/
-    * checker/ - checker files
-    * fileio/ - contains classes used to read data from the json files
-    * main/
-        * Main - the Main class runs the checker on your implementation. Add the entry point to your implementation in it. Run Main to test your implementation from the IDE or from command line.
-        * Test - run the main method from Test class with the name of the input file from the command line and the result will be written
-          to the out.txt file. Thus, you can compare this result with ref.
-* input/ - contains the tests in JSON format
-* ref/ - contains all reference output for the tests in JSON format
+**Interactive Split Payments:** A "Custom Split" mechanism requiring a consensus flow (Accept/Reject) among multiple participants.
 
-## Tests
+**System Refactoring:** Extensive use of Design Patterns to manage growing complexity.
 
-Tests Basic 1 - 10: Infrastructure \
-Tests Functional 11 - 17: Advanced \
-Tests Flow 18 - 20: Large Input
+**📐 Architectural Evolution**
+To manage the system's growth, I implemented several Behavioral and Creational Design Patterns:
 
-1. test01_user_updates - 2p
-2. test02_upgrade_plan - 2p
-3. test04_commisions - 2p
-4. test05_savings_update - 2p
-5. test06_cashback - 2p
-6. test07_simple_split_payment - 2p
-7. test08_advanced_split_payment - 2p
-8. test09_business_account_simple - 2p
-9. test10_business_account_limits - 2p
+**Command Pattern:** Encapsulated financial operations within an Action interface, allowing for a decoupled and extensible execution flow for different banking commands.
 
+**Factory Method Pattern:** Utilized AccountFactory and CardFactory to centrally manage the instantiation of diverse entities (Classic, Savings, Business), ensuring consistent object creation across the system.
+
+**Observer Pattern:** Implemented a Cashback engine using a subscription-based model (subscribe/notify) to update account balances based on real-time transaction events.
+
+**Singleton Pattern:** Used for the central Bank and Output managers to maintain a single source of truth for the system's state and registry.
+
+🛠 Technical Stack
+Language: Java 21
+
+Data Processing: JSON(Jackson) for structured I/O.
+
+Design Focus: Scalability, Refactoring, and Enterprise-grade Logic.
