@@ -27,7 +27,6 @@ public class SplitPaymentManager {
         pending.clear();
         accepted.clear();
 //        One user rejected the payment.
-        //TODO: Reject payment
     }
     public void accept(final Account account) {
         accepted.put(account, pending.get(account));
@@ -57,7 +56,6 @@ public class SplitPaymentManager {
         }
 
         for (Account acc : accepted.keySet()) {
-            //Mental breakdown
             String amountSaVaPlacaCumArataCaSmrEuNuVaPlaceNimic =
                     String.format("%.2f", input.getAmount());
             ObjectNode output = Output.getInstance().mapper.createObjectNode()
