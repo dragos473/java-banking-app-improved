@@ -13,7 +13,8 @@ Business Accounts & Role-Based Access (RBAC): Implementation of shared business 
 
 **System Refactoring:** Extensive use of Design Patterns to manage growing complexity.
 
-**📐 Architectural Evolution**
+**📐 Architectural Evolution:**
+
 To manage the system's growth, I implemented several Behavioral and Creational Design Patterns:
 
 **Command Pattern:** Encapsulated financial operations within an Action interface, allowing for a decoupled and extensible execution flow for different banking commands.
