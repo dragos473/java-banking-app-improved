@@ -1,5 +1,5 @@
 ## Java Banking System – Advanced Features
-This project extends the Core Engine to support **Business-Level Banking** and **Advanced Fintech Logic**. It prioritizes complex system interactions. While the first stage focused on transaction integrity, this stage introduces **complex business logic, tiered service plans, and role-based access control (RBAC).**
+This project extends the [Core Engine](https://github.com/dragos473/java-banking-app) to support **Business-Level Banking** and **Advanced Fintech Logic**. It prioritizes complex system interactions. While the first stage focused on transaction integrity, this stage introduces **complex business logic, tiered service plans, and role-based access control (RBAC).**
 The primary goal of this phase was **architectural refactoring** to ensure the codebase can handle the increasing complexity of **modern fintech requirements**.
 **🚀 Advanced Functionality**
 
